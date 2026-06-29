@@ -291,6 +291,12 @@ Note: Only sent if button is binded to **DPI+**, **DPI-**, **DPI Cycle** or **Ke
   <tr>
     <td>f8</td><td>Middle forward (Towards front)</td>
   </tr>
+  <tr>
+    <td>f7</td><td>Lower side button A (G-Lab Kult Nitrogen Atom)</td>
+  </tr>
+  <tr>
+    <td>f9</td><td>Lower side button B (G-Lab Kult Nitrogen Atom)</td>
+  </tr>
 </table>
 
 **DP** is the DPI profile that should be active (00-03)

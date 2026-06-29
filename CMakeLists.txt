@@ -86,6 +86,7 @@ set(BUILD_SHARED_LIBS FALSE)
 FetchContent_Declare(
   hidapi
   URL      https://github.com/libusb/hidapi/archive/refs/tags/hidapi-0.15.0.zip
+  URL_HASH SHA256=dea0c29849e7cac86a4561bf36ba0d97a755a16dc99b9e75714f4af7ea2af2f1
   DOWNLOAD_EXTRACT_TIMESTAMP ON
 )
 

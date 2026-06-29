@@ -20,7 +20,8 @@ public:
     static void applyMouseSettings(hid_device *dev, MouseSettings settings);
     static constexpr VendorProductID supportedDevices[] {
         {0x18f8, 0x1286},
-        {0x30fa, 0x1701}
+        {0x30fa, 0x1701},
+        {0x30fa, 0x1040}
     };
 
     enum UpdateType {

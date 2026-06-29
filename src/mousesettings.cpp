@@ -19,7 +19,7 @@ void MouseSettings::loadFromFile() {
     // Bindings
     settings.beginGroup("Bindings");
     int bindings_size = settings.beginReadArray("bindings");
-    for(int i = 0; i < bindings_size; i++) {
+    for(int i = 0; i < bindings_size && i < BUTTON_COUNT; i++) {
         settings.setArrayIndex(i);
         buttons[i].bindedAction = settings.value("action", buttons[i].bindedAction).toInt();
         buttons[i].keyboardCombo = QKeyCombination::fromCombined(settings.value("combo", 0).toInt());
@@ -54,7 +54,7 @@ void MouseSettings::saveToFile() const {
     // Bindings
     settings.beginGroup("Bindings");
     settings.beginWriteArray("bindings");
-    for(int i = 0; i < 7; i++) {
+    for(int i = 0; i < 9; i++) {
         settings.setArrayIndex(i);
         MouseButton btn = buttons[i];
         settings.setValue("name", btn.name);

@@ -1,7 +1,7 @@
-# Instant A704/A704F Mouse Utilities for Linux
+# Instant A704/A704F-Compatible Mouse Utilities for Linux
 ![](https://img.shields.io/badge/jank_inside-brown) ![](https://img.shields.io/badge/works_on-my_machine-green)
 
-This is a mouse configuration tools for the [A704](https://instant-sys.com/uploads/pdf/norm/SPEC/A704C_SPEC_EN.V1.01.pdf)/[A704F](https://instant-sys.com/uploads/pdf/norm/SPEC/A704F_SPEC_EN.V1.00.pdf) Gaming Mouse IC by Instant Microelectronics.  
+This is a Linux mouse configuration tool for devices based on the [A704](https://instant-sys.com/uploads/pdf/norm/SPEC/A704C_SPEC_EN.V1.01.pdf)/[A704F](https://instant-sys.com/uploads/pdf/norm/SPEC/A704F_SPEC_EN.V1.00.pdf) gaming mouse IC by Instant Microelectronics.
 
 Configurable items including custom button bindings, change speed of breathing light and DPI configuration.  
 
@@ -16,6 +16,12 @@ Configurable items including custom button bindings, change speed of breathing l
 Vendor IDs/Product IDs:
 - `18f8:1286` (A704F)
 - `30fa:1701` (A704)
+- `30fa:1040` (G-Lab Kult Nitrogen Atom)
+
+The G-Lab Kult Nitrogen Atom support includes its two additional lower side
+buttons, exposed in the interface as **Lower Side Button A** and
+**Lower Side Button B**.
+
 All the observed details can be found in [SPECS.md](./SPECS.md)
 
 For more context and story, [I have written a blog about it](https://blog.lx862.com/blog/2024-05-13-reverse-engineering-a-mouse/)

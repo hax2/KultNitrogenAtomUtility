@@ -104,7 +104,7 @@ void HIDHelper::applyMouseSettings(hid_device *dev, MouseSettings settings) {
     sendMouseReport(dev, FireRate, 0x00, settings.fireRate);
 
     // Mouse bindings
-    for(int i = 0; i < 7; i++) {
+    for(int i = 0; i < 9; i++) {
         sendMouseReport(dev, KeyRebind, settings.buttons[i].buttonHex, MouseSettings::actionMenuIdxToHex[settings.buttons[i].bindedAction]);
     }
 

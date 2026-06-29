@@ -6,6 +6,8 @@
 #include <QMainWindow>
 #include <hidapi/hidapi.h>
 
+class QComboBox;
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -80,11 +82,14 @@ private:
     QThread *inputHandlerThread;
     RGBPreview rgbPreview;
     MouseSettings mouseSettings = MouseSettings();
+    QComboBox *lowerSideAComboBox = nullptr;
+    QComboBox *lowerSideBComboBox = nullptr;
 
     void onEventLoop();
     char getActionType(int index);
     void initUIFields(const MouseSettings settings);
     void promptCustomBindingDialog(int buttonIndex);
+    void createExtraButtonControls();
     void handleSpecialInput(unsigned char type, unsigned char mouseKeyPressed, unsigned char dpi);
 };
 #endif // MAINWINDOW_H

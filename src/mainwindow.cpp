@@ -3,6 +3,9 @@
 #include "custominputhandler.h"
 #include "ui_mainwindow.h"
 #include "hidhelper.h"
+#include <QBoxLayout>
+#include <QLabel>
+#include <QComboBox>
 #include <hidapi/hidapi.h>
 #include <QMessageBox>
 #include <QTimer>
@@ -17,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     hid_init();
     ui->setupUi(this);
+    createExtraButtonControls();
     hid_device *dev = HIDHelper::openMouseInterface(this);
     HIDHelper::applyMouseSettings(dev, mouseSettings); // Apply config on startup, since config is not persistently stored on mouse
     hid_close(dev);
@@ -99,6 +103,45 @@ void MainWindow::initUIFields(const MouseSettings settings) {
     ui->sbdComboBox->setCurrentIndex(settings.buttons[4].bindedAction);
     ui->mfdComboBox->setCurrentIndex(settings.buttons[5].bindedAction);
     ui->mbdComboBox->setCurrentIndex(settings.buttons[6].bindedAction);
+    if(lowerSideAComboBox) lowerSideAComboBox->setCurrentIndex(settings.buttons[7].bindedAction);
+    if(lowerSideBComboBox) lowerSideBComboBox->setCurrentIndex(settings.buttons[8].bindedAction);
+}
+
+
+void MainWindow::createExtraButtonControls()
+{
+    auto *layout = ui->verticalLayout_9;
+    if(!layout || lowerSideAComboBox || lowerSideBComboBox) return;
+
+    auto addControl = [this, layout](const QString &labelText, int buttonIndex) -> QComboBox* {
+        QLabel *label = new QLabel(labelText, this);
+        label->setAlignment(Qt::AlignRight);
+
+        QComboBox *combo = new QComboBox(this);
+        combo->setObjectName(labelText.simplified().remove(' ') + QStringLiteral("ComboBox"));
+
+        for(int i = 0; i < ui->sbdComboBox->count(); ++i) {
+            combo->addItem(ui->sbdComboBox->itemText(i));
+        }
+
+        combo->setCurrentIndex(mouseSettings.buttons[buttonIndex].bindedAction);
+
+        int pos = layout->count() > 0 ? layout->count() - 1 : 0;
+        layout->insertWidget(pos, label);
+        layout->insertWidget(pos + 1, combo);
+
+        connect(combo, QOverload<int>::of(&QComboBox::activated), this,
+            [this, buttonIndex](int index) {
+                mouseSettings.buttons[buttonIndex].bindedAction = index;
+                if(index == 11) promptCustomBindingDialog(buttonIndex);
+            }
+        );
+
+        return combo;
+    };
+
+    lowerSideAComboBox = addControl(tr("Lower Side Button A"), 7);
+    lowerSideBComboBox = addControl(tr("Lower Side Button B"), 8);
 }
 
 void MainWindow::promptCustomBindingDialog(int buttonIndex) {
@@ -182,7 +225,7 @@ void MainWindow::on_mfdComboBox_activated(int index)
 void MainWindow::on_mbdComboBox_activated(int index)
 {
     mouseSettings.buttons[6].bindedAction = index;
-    promptCustomBindingDialog(6);
+    if(index == 11) promptCustomBindingDialog(6);
 }
 
 void MainWindow::on_flashRGBButton_clicked()

@@ -76,5 +76,5 @@ void MouseInputHandler::sendMultimediaKey(hid_device *device, uint16_t key) {
     reports[0] = key >> 8;
     reports[1] = key & 0x00ff;
 
-    HIDHelper::sendRawMouseReport(device, HIDHelper::MakeInputMediaKey, reports, 4);
+    HIDHelper::sendRawMouseReport(device, HIDHelper::MakeInputMediaKey, reports, sizeof(reports));
 }

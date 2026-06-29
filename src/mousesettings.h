@@ -50,6 +50,7 @@ public:
     };
 
     static const int DPI_PROFILES = 4;
+    static const int BUTTON_COUNT = 9;
     unsigned char rgbMode = 0x10;
     unsigned char scrollMode = 0x00;
     int fireRate = 4;
@@ -62,14 +63,16 @@ public:
         DPIProfile{12, true}
     };
 
-    MouseButton buttons[7] = {
+    MouseButton buttons[9] = {
         MouseButton{"LMB", 0x01, 0}, // LMB
         MouseButton{"MMB", 0x02, 1}, // MMB
         MouseButton{"RMB", 0x03, 2}, // RMB
         MouseButton{"SIDE_FWD", 0x05, 3}, // SIDE_FWD
         MouseButton{"SIDE_BWD", 0x04, 4}, // SIDE_BWD
         MouseButton{"MID_FWD", 0x08, 9}, // MID_FWD
-        MouseButton{"MID_BWD", 0x06, 10} // MID_BWD
+        MouseButton{"MID_BWD", 0x06, 10}, // MID_BWD
+        MouseButton{"LOWER_SIDE_A", 0x07, 3}, // G-Lab lower side button A
+        MouseButton{"LOWER_SIDE_B", 0x09, 4}  // G-Lab lower side button B
     };
 
     void loadFromFile();
